@@ -2,7 +2,7 @@
 #include <vector>
 #include <string>
 
-// Функция для получения путей к изображениям в заданной папке
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РїСѓС‚РµР№ Рє РёР·РѕР±СЂР°Р¶РµРЅРёСЏРј РІ Р·Р°РґР°РЅРЅРѕР№ РїР°РїРєРµ
 std::vector<std::wstring> getImagePaths(const std::wstring& folderPath) {
     std::vector<std::wstring> imagePaths;
     WIN32_FIND_DATAW findData;
@@ -21,28 +21,28 @@ std::vector<std::wstring> getImagePaths(const std::wstring& folderPath) {
 }
 
 int main() {
-    // Путь к папке с изображениями
+    // РџСѓС‚СЊ Рє РїР°РїРєРµ СЃ РёР·РѕР±СЂР°Р¶РµРЅРёСЏРјРё
     std::wstring imagePath = L"C:\\Users\\U1\\Build\\practice\\wallpaper";
 
-    // Получаем список путей к изображениям в заданной папке
+    // РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє РїСѓС‚РµР№ Рє РёР·РѕР±СЂР°Р¶РµРЅРёСЏРј РІ Р·Р°РґР°РЅРЅРѕР№ РїР°РїРєРµ
     std::vector<std::wstring> imagePaths = getImagePaths(imagePath);
 
-    // Интервал смены обоев (в миллисекундах)
+    // РРЅС‚РµСЂРІР°Р» СЃРјРµРЅС‹ РѕР±РѕРµРІ (РІ РјРёР»Р»РёСЃРµРєСѓРЅРґР°С…)
     const int wallpaperDelay = 1500;
 
-    // Индекс текущего изображения
+    // РРЅРґРµРєСЃ С‚РµРєСѓС‰РµРіРѕ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
     int currentImageIndex = 0;
 
-    // Установка первого обоев
+    // РЈСЃС‚Р°РЅРѕРІРєР° РїРµСЂРІРѕРіРѕ РѕР±РѕРµРІ
     SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID)imagePaths[currentImageIndex].c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE);
 
     while (true) {
-        // Пауза в течение заданного интервала
+        // РџР°СѓР·Р° РІ С‚РµС‡РµРЅРёРµ Р·Р°РґР°РЅРЅРѕРіРѕ РёРЅС‚РµСЂРІР°Р»Р°
         Sleep(wallpaperDelay);
 
-        // Переход к следующему изображению
+        // РџРµСЂРµС…РѕРґ Рє СЃР»РµРґСѓСЋС‰РµРјСѓ РёР·РѕР±СЂР°Р¶РµРЅРёСЋ
         currentImageIndex = (currentImageIndex + 1) % imagePaths.size();
-        // Установка следующего обоев
+        // РЈСЃС‚Р°РЅРѕРІРєР° СЃР»РµРґСѓСЋС‰РµРіРѕ РѕР±РѕРµРІ
         SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, (PVOID)imagePaths[currentImageIndex].c_str(), SPIF_UPDATEINIFILE | SPIF_SENDCHANGE);
     }
 
